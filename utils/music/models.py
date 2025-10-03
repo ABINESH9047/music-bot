@@ -3014,4 +3014,4 @@ class LavalinkPlayer(wavelink.Player):
 
 
 def music_mode(bot: BotCore):
-    return wavelink.Client(bot=bot)
+    return wavelink.Client(bot=bot, session=bot.session)

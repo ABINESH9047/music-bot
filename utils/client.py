@@ -576,6 +576,12 @@ class BotPool:
                         return
 
                     bot.initializing = True
+                    
+                    if not bot.session:
+                        bot.session = aiohttp.ClientSession()
+                    
+                    if not bot.music:
+                        bot.music = music_mode(bot)
 
                     if str(bot.user.id) in bot.config["INTERACTION_BOTS_CONTROLLER"]:
                         self.bots.remove(bot)
@@ -724,11 +730,10 @@ class BotPool:
 class BotCore(commands.AutoShardedBot):
 
     def __init__(self, *args, **kwargs):
-        self.session: Optional[aiohttp.ClientError] = None
+        self.session: Optional[aiohttp.ClientSession] = None
         self.pool: BotPool = kwargs.pop('pool')
         self.default_prefix = kwargs.pop("default_prefix", "!!")
         self.spotify: Optional[spotipy.Spotify] = self.pool.spotify
-        self.session = aiohttp.ClientSession()
         self.color = kwargs.pop("embed_color", None)
         self.identifier = kwargs.pop("identifier", "")
         self.appinfo: Optional[disnake.AppInfo] = None
@@ -746,7 +751,7 @@ class BotCore(commands.AutoShardedBot):
         self.dm_cooldown = commands.CooldownMapping.from_cooldown(rate=2, per=30, type=commands.BucketType.member)
         self.number = kwargs.pop("number", 0)
         super().__init__(*args, **kwargs)
-        self.music = music_mode(self)
+        self.music = None
         self.interaction_id: Optional[int] = None
         self.wavelink_node_reconnect_tasks = {}
 

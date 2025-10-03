@@ -16,3 +16,5 @@ tornado
 emoji
 spotipy
 urllib3>=2.1.0
+aiohttp
+disnake

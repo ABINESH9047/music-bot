@@ -5,12 +5,16 @@ RAILWAY DEPLOYMENT SETUP INSTRUCTIONS
 REQUIRED ENVIRONMENT VARIABLES:
 -------------------------------
 
-1. BOT TOKEN (Choose one method):
-   - TOKEN_BOT_1=your_discord_bot_token_here
-   OR
-   - m1=your_discord_bot_token_here
+1. BOT TOKEN (REQUIRED - Use TOKEN or TOKEN_BOT_1):
+   - TOKEN=your_discord_bot_token_here
+   OR for multiple bots:
+   - TOKEN_BOT_1=your_first_bot_token_here
+   - TOKEN_BOT_2=your_second_bot_token_here
    
    Get from: Discord Developer Portal > Your Application > Bot > Token
+   
+   IMPORTANT: The bot only recognizes TOKEN or TOKEN_BOT_* variables.
+   Do NOT use other variable names like m1, m2, etc.
 
 2. MONGO (Database):
    MONGO=your_mongodb_connection_string
@@ -96,6 +100,7 @@ If the bot doesn't start:
 4. Check that bot token hasn't been regenerated
 
 Common errors:
-- "Invalid token" - Check TOKEN_BOT_1 or m1 variable
+- "Invalid token" - Check TOKEN or TOKEN_BOT_1 variable (make sure it's named correctly!)
 - "Cannot connect to MongoDB" - Verify MONGO connection string
 - "Missing intents" - Enable required intents in Discord Developer Portal
+- Bot crashes immediately - Ensure you used TOKEN or TOKEN_BOT_* (not other names)

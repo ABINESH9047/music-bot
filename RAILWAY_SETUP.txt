@@ -1,0 +1,101 @@
+===============================================
+RAILWAY DEPLOYMENT SETUP INSTRUCTIONS
+===============================================
+
+REQUIRED ENVIRONMENT VARIABLES:
+-------------------------------
+
+1. BOT TOKEN (Choose one method):
+   - TOKEN_BOT_1=your_discord_bot_token_here
+   OR
+   - m1=your_discord_bot_token_here
+   
+   Get from: Discord Developer Portal > Your Application > Bot > Token
+
+2. MONGO (Database):
+   MONGO=your_mongodb_connection_string
+   
+   Get from: MongoDB Atlas > Connect > Connection String
+   Example: mongodb+srv://username:password@cluster.mongodb.net/?retryWrites=true&w=majority
+
+3. SPOTIFY CREDENTIALS (Required for Spotify support):
+   SPOTIFY_CLIENT_ID=your_spotify_client_id
+   SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+   
+   Get from: https://developer.spotify.com/dashboard/applications
+
+RECOMMENDED ENVIRONMENT VARIABLES:
+----------------------------------
+
+DEFAULT_PREFIX=!
+AUTO_DOWNLOAD_LAVALINK_SERVERLIST=true
+PLAYER_SESSIONS_MONGODB=true
+MESSAGE_CONTENT_INTENT=true
+GUILD_MESSAGES_INTENT=true
+VOICE_STATES_INTENT=true
+GUILDS_INTENT=true
+EMOJIS_AND_STICKERS_INTENT=true
+INTEGRATIONS_INTENT=true
+INVITES_INTENT=true
+AUTO_SYNC_COMMANDS=true
+ENABLE_COMMANDS_COOLDOWN=true
+
+DEPLOYMENT STEPS:
+-----------------
+
+1. Create a new project on Railway (https://railway.app)
+
+2. Connect your GitHub repository or deploy from CLI
+
+3. Add all required environment variables in Railway:
+   - Go to your project > Variables tab
+   - Add each variable listed above
+   
+4. Railway will automatically:
+   - Detect Python runtime
+   - Install dependencies from requirements.txt
+   - Start the bot using the Procfile
+
+5. Monitor deployment:
+   - Check the Deployments tab for build status
+   - View logs in the Logs tab for any errors
+
+IMPORTANT SECURITY NOTES:
+-------------------------
+
+- NEVER commit .env file to GitHub
+- Keep your bot token and MongoDB credentials secret
+- Regenerate tokens if accidentally exposed
+- Use Railway's environment variables feature for all secrets
+
+DISCORD BOT PERMISSIONS REQUIRED:
+---------------------------------
+
+Make sure your bot has these intents enabled in Discord Developer Portal:
+- Message Content Intent (for reading messages)
+- Server Members Intent (if using member features)
+- Presence Intent (optional)
+
+And these permissions when inviting:
+- Read Messages/View Channels
+- Send Messages
+- Embed Links
+- Attach Files
+- Read Message History
+- Add Reactions
+- Connect (voice)
+- Speak (voice)
+
+TROUBLESHOOTING:
+----------------
+
+If the bot doesn't start:
+1. Check Railway logs for error messages
+2. Verify all required environment variables are set
+3. Ensure MongoDB connection string is valid
+4. Check that bot token hasn't been regenerated
+
+Common errors:
+- "Invalid token" - Check TOKEN_BOT_1 or m1 variable
+- "Cannot connect to MongoDB" - Verify MONGO connection string
+- "Missing intents" - Enable required intents in Discord Developer Portal
